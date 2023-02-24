@@ -32,12 +32,46 @@ namespace Temp
 			{
 				return (ASSET_TYPE) Convert.ChangeType(fonts[_id], typeof(ASSET_TYPE));
 			}
+
+			throw new FileNotFoundException($"Asset withID '{_id}' does not exist");
 		}
 
 		public static void Load()
 		{
-			
+			LoadAllOfType<Texture2D>(textures, "Textures", "png", Raylib.LoadTexture);
+			LoadAllOfType<Image>(images, "Images", "png", Raylib.LoadImage);
+			LoadAllOfType<Sound>(sounds, "Sounds", "png", Raylib.LoadSound);
+			LoadAllOfType<Font>(fonts, "Fonts", "png", Raylib.LoadFont);
 		}
+
+		private static void LoadAllOfType<ASSET_TYPE>(Dictionary<string, ASSET_TYPE> _assets, string _folder, string _extension, Func<string, ASSET_TYPE> _loadFnc)
+		{
+			List<string> files = LocateFiles(_folder, _extension);
+			foreach(string file in files)
+			{
+				string id = string.Concat($"{_folder}/", file.AsSpan(file.LastIndexOf(_folder, StringComparison.Ordinal) + _folder.Length + 1));
+				id = id.Replace($"{_extension}", "").Replace('\\', '/');
+				_assets.Add(id, _loadFnc(file));
+			}
+		}
+
+		private static List<string> LocateFiles(string _folder, string _extension)
+		{
+			List<string> files = new List<string>();
+			string path = $"{Directory.GetCurrentDirectory()}\\{Path.Combine("Assets\\", _folder)}";
+			if(!Directory.Exists(path))
+			{
+				return files;
+			}
+
+			foreach(string file in Directory.GetFiles(path, $"*.{_extension}", SearchOption.AllDirectories))
+			{
+				files.Add(file);
+			}
+
+			return files;
+		}
+
 		public static void Unload()
 		{
 			ClearMemoryFor<Texture2D>(textures, Raylib.UnloadTexture);
@@ -52,6 +86,7 @@ namespace Temp
 			{
 				_unloadFnc(asset);
 			}
+
 			_assets.Clear();
 		}
 	}
