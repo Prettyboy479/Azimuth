@@ -1,6 +1,6 @@
 ﻿using Raylib_cs;
 
-using Temp;
+using Azimuth;
 
 namespace Azimuth_Test
 {

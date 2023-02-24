@@ -1,6 +1,6 @@
 ﻿using Raylib_cs;
 
-namespace Temp
+namespace Azimuth
 {
 	public sealed class Window
 	{

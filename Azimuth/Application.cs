@@ -1,10 +1,9 @@
 ﻿using Azimuth.GameObjects;
+using Azimuth.GameStates;
 
 using Raylib_cs;
 
-using Temp.GameStates;
-
-namespace Temp
+namespace Azimuth
 {
 	public sealed class Application
 	{
@@ -12,8 +11,8 @@ namespace Temp
 
 		public static void Run(int _width, int _height, string _title, Color _color, Game _game)
 		{
-			Application app = new Application(_width, _height, _title, _color, _game);
-			app.Run();
+			Instance = new Application(_width, _height, _title, _color, _game);
+			Instance.Run();
 		}
 		public Window Window { get; }
 		private readonly Game game;

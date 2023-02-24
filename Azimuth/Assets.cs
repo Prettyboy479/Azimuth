@@ -2,7 +2,7 @@
 
 using System.Runtime.Loader;
 
-namespace Temp
+namespace Azimuth
 {
 	public static class Assets
 	{
@@ -39,9 +39,9 @@ namespace Temp
 		public static void Load()
 		{
 			LoadAllOfType<Texture2D>(textures, "Textures", "png", Raylib.LoadTexture);
-			LoadAllOfType<Image>(images, "Images", "png", Raylib.LoadImage);
-			LoadAllOfType<Sound>(sounds, "Sounds", "png", Raylib.LoadSound);
-			LoadAllOfType<Font>(fonts, "Fonts", "png", Raylib.LoadFont);
+			LoadAllOfType<Image>(images, "Images", "jpg", Raylib.LoadImage);
+			LoadAllOfType<Sound>(sounds, "Sounds", "wav", Raylib.LoadSound);
+			LoadAllOfType<Font>(fonts, "Fonts", "ttf", Raylib.LoadFont);
 		}
 
 		private static void LoadAllOfType<ASSET_TYPE>(Dictionary<string, ASSET_TYPE> _assets, string _folder, string _extension, Func<string, ASSET_TYPE> _loadFnc)
@@ -50,7 +50,7 @@ namespace Temp
 			foreach(string file in files)
 			{
 				string id = string.Concat($"{_folder}/", file.AsSpan(file.LastIndexOf(_folder, StringComparison.Ordinal) + _folder.Length + 1));
-				id = id.Replace($"{_extension}", "").Replace('\\', '/');
+				id = id.Replace($".{_extension}", "").Replace('\\', '/');
 				_assets.Add(id, _loadFnc(file));
 			}
 		}

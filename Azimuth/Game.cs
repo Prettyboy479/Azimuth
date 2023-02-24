@@ -1,4 +1,4 @@
-﻿namespace Temp
+﻿namespace Azimuth
 {
 	public abstract class Game
 	{

@@ -1,4 +1,4 @@
-﻿namespace Temp.GameStates
+﻿namespace Azimuth.GameStates
 {
 	public static class GameStateManager
 	{
