@@ -2,6 +2,8 @@
 using Azimuth.GameObjects;
 using Azimuth.GameStates;
 
+using Raylib_cs;
+
 using Spasteroids.UI;
 
 using System.Numerics;
@@ -12,15 +14,23 @@ namespace Spasteroids.GameStates
 	{
 		public string ID => "Main Menu";
 		private Button playButton;
+
 		public void Load()
 		{
 			int screenWidth = Application.Instance.Window.Width;
 			int screenHeight = Application.Instance.Window.Height;
-			int sizeX = screenWidth / 2;
-			int sizeY = 100;
-			int posX = screenWidth / 2;
-			int posY = screenHeight / 2 - sizeY / 2;
-			playButton = new Button(new Vector2(posX, posY), new Vector2(sizeX, sizeY), "Play");
+
+			Vector2 size = new Vector2(screenWidth * 0.5f, 100);
+			Vector2 pos = new Vector2(size.X, screenHeight * 0.5f - size.X * 0.5f);
+			ColorBlack buttonColors = new ColorBlack(Color.RAYWHITE, Color.LIGHTGRAY, Color.DARKGRAY, Color.BLACK);
+			Button.RenderSettings renderSettings = new Button.RenderSettings(buttonColors, 100, "Fonts/poxel");
+
+			playButton = new Button(pos, size, "Play", renderSettings);
+			playButton.AddListener(() =>
+			{
+			GameStateManager.DeactivateState(ID);	
+			GameStateManager.ActivateState("Play");	
+			});
 			GamObjectManager.Spawn(playButton);
 		}
 
@@ -28,6 +38,10 @@ namespace Spasteroids.GameStates
 
 		public void Draw() { }
 
-		public void Unload() { }
+		public void Unload()
+		{
+			GamObjectManager.Destroy(playButton);
+			playButton = null;
+		}
 	}
 }
