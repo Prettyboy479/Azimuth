@@ -1,3 +1,16 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using Raylib_cs;
 
-Console.WriteLine("Hello, World!");
+using Temp;
+
+namespace Azimuth_Test
+{
+	public static class Program
+	{
+		public static void Main()
+		{
+			Application.Run(800, 600, "Azimuth Test", Color.BLACK, new AzimuthTestGame());
+		}
+	}
+
+}
+
