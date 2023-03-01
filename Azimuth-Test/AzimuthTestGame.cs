@@ -1,5 +1,5 @@
 ﻿using Azimuth;
-
+using Azimuth.GameObjects;
 
 namespace Azimuth_Test
 {
@@ -7,7 +7,7 @@ namespace Azimuth_Test
 	{
 		public override void Load()
 		{
-			
+			GameObject? obj = new GameObject();
 		}
 
 		public override void Unload()
