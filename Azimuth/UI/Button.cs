@@ -6,12 +6,13 @@ namespace Azimuth.UI
 {
 	public class Button : InteractableWidget
 	{
+		public delegate void OnClickEvent();
 		public class RenderSettings
 		{
 			public static RenderSettings normal = new RenderSettings();
 			public ColorBlock colors = new ColorBlock()
 			{
-				disabled = new Color(255, 255, 255, 255),
+				disabled = Color.PINK,
 				hovered = Color.DARKGRAY,
 				normal = Color.LIGHTGRAY,
 				selected = Color.BLACK
@@ -25,6 +26,7 @@ namespace Azimuth.UI
 			public Color textcolor = Color.RAYWHITE;
 		}
 
+		private OnClickEvent? onClick;
 		private readonly float roundedness;
 		private readonly string text;
 		private readonly int fontSize;
@@ -47,11 +49,31 @@ namespace Azimuth.UI
 			textSize = Raylib.MeasureTextEx(font, text, fontSize, fontSpacing) * 0.5f;
 		}
 
+		public void AddListener(OnClickEvent _event)
+		{
+			if(onClick == null)
+			{
+				onClick = _event;
+			}
+			else
+			{
+				onClick += _event;
+			}
+		}
+
+		public void RemoveListener(OnClickEvent _event)
+		{
+			if(onClick != null)
+			{
+				onClick -= _event;
+			}
+		}
 		protected override void OnStateChange(InteractionState _state, InteractionState _oldState)
 		{
 			if(_state != InteractionState.Selected && _oldState == InteractionState.Selected)
 			{
 				// the button is no longer being clicked, so do the event.
+				onClick?.Invoke();
 			}
 		}
 
