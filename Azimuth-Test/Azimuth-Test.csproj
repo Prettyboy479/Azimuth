@@ -28,6 +28,10 @@
       <None Update="Assets\config.cfg">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+      <None Remove="Assets\Textures\imagewidget.jpg" />
+      <None Update="Assets\Textures\3esnra.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

@@ -39,10 +39,12 @@ namespace Azimuth
 			while(!Raylib.WindowShouldClose())
 			{
 				float deltaTime = Raylib.GetFrameTime();
+				game.Update(deltaTime);
 				GamObjectManager.Update(deltaTime);
 				GameStateManager.Update(deltaTime);
 				Raylib.BeginDrawing();
 				Window.Clear();
+				game.Draw();
 				GamObjectManager.Draw();
 				GameStateManager.Draw();
 				Raylib.EndDrawing();
