@@ -24,6 +24,7 @@ namespace Azimuth.UI
 
 		internal static void Update()
 		{
+			widgets.Sort();
 			foreach(Widget widget in widgets)
 			{
 				widget.Update(Raylib.GetMousePosition());

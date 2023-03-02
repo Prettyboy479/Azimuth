@@ -47,10 +47,19 @@ namespace Azimuth.UI
 			textSize = Raylib.MeasureTextEx(font, text, fontSize, fontSpacing) * 0.5f;
 		}
 
+		protected override void OnStateChange(InteractionState _state, InteractionState _oldState)
+		{
+			if(_state != InteractionState.Selected && _oldState == InteractionState.Selected)
+			{
+				// the button is no longer being clicked, so do the event.
+			}
+		}
+
 		public override void Draw()
 		{
 			Raylib.DrawRectangleRounded(Bounds, roundedness, 5, ColorFromState());
 			Raylib.DrawTextPro(font, text, position + textSize, Vector2.Zero, 0f, fontSize, fontSpacing, textColor);
 		}
+		
 	}
 }

@@ -16,6 +16,7 @@ namespace Azimuth_Test
 		{
 			//image = new ImageWidget(Vector2.Zero, new Vector2(200, 200), "3esnra");
 			button = new Button(Vector2.Zero, new Vector2(150, 75), Button.RenderSettings.normal);
+			UIManager.Add(button);
 		}
 
 		public override void Draw()
